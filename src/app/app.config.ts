@@ -9,6 +9,7 @@ import { provideToastr } from 'ngx-toastr';
 import { errorHandlerProvider } from './providers/error.handler.provider';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,5 +23,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HttpClientModule),
     errorHandlerProvider, provideAnimationsAsync(),
     provideNativeDateAdapter(),
+    HashLocationStrategy,
   ]
 };
