@@ -37,12 +37,12 @@ export class AuthService {
   }
 
   updateIsLoggedIn( value : boolean) {
-    //console.log('AUTH SERV: Update isLoggedIn', value);    
+    console.log('AUTH SERV: Update isLoggedIn', value);    
     this.loggedInSubject.next(value);
   }
 
   updateCurrentUser( user : any ) {
-    //console.log('AUTH SERV: Update currentUser', user);
+    console.log('AUTH SERV: Update currentUser', user);
     this.userSubject.next(user);
   }
 
