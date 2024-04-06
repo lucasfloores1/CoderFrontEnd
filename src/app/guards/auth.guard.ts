@@ -13,13 +13,13 @@ export const authGuard: CanActivateFn = (route, state) => {
       });
       return true;
     } 
-    //console.log('GUARD: Logged out');    
+    console.log('GUARD: Logged out');    
     authService.updateCurrentUser({});
     authService.updateIsLoggedIn(false);
     router.navigate(['login']);
     return false
   } else {
-    //console.log('GUARD: Logged in');
+    console.log('GUARD: Logged in');
     return true
   }
 };
