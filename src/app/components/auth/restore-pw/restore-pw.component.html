@@ -1,0 +1,38 @@
+<form [formGroup]="emailForm" (ngSubmit)="emailSubmit()" class="email" *ngIf="!isToken">
+    <div class="email">
+        <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+            <div class="text-center mb-5">
+                <img src="assets/images/logos/logo.png" alt="Logo" height="50" class="mb-3">
+                <div class="text-900 text-3xl font-medium mb-3">Forgot Your Password?</div>
+                <div class="text-600 mb-3">Don't worry! We'll help you restore access to your account.</div>
+            </div>
+            <div>
+                <label for="email1" class="block text-900 font-medium mb-2">Email</label>
+                <input id="email1" type="text" placeholder="Email address" pInputText class="w-full mb-3" formControlName="email">
+        
+                <button type="submit" pButton pRipple label="Send email" icon="pi pi-user" class="w-full" [disabled]="!emailForm.valid"></button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form [formGroup]="passwordForm" (ngSubmit)="passwordSubmit()" class="password" *ngIf="isToken">
+    <div class="password">
+        <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+            <div class="text-center mb-5">
+                <img src="assets/images/logos/logo.png" alt="Logo" height="50" class="mb-3">
+                <div class="text-900 text-3xl font-medium mb-3">Forgot Your Password?</div>
+                <div class="text-600 mb-3">Don't worry! We'll help you restore access to your account.</div>
+            </div>
+            <div>
+                <label for="email2" class="block text-900 font-medium mb-2">Email</label>
+                <input id="email2" type="text" placeholder="Email address" pInputText class="w-full mb-3" formControlName="email">
+
+                <label for="password1" class="block text-900 font-medium mb-2">New Password</label>
+                <input id="password1" type="text" placeholder="New Password" pInputText class="w-full mb-3" formControlName="password">
+        
+                <button type="submit" pButton pRipple label="Send password" icon="pi pi-user" class="w-full" [disabled]="!passwordForm.valid"></button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,3 @@
+<div class="product_panel" *ngIf="isLoggedIn$">
+    <app-product-panel (addProduct)="addProduct($event)" [products]="products"></app-product-panel>
+</div>

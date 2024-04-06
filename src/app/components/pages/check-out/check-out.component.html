@@ -1,0 +1,32 @@
+<div *ngIf="cart" class="card cart-panel">
+  <div class="cart-info">
+  <section class="cart-header flex flex-row gap-3">
+      <i class="pi pi-shopping-cart" style="font-size: 2rem"></i>
+      <h3>Checkout</h3>
+  </section>
+  <p-divider></p-divider>
+  <ul class="cart-list flex flex-column gap-3">
+      <li class="product" *ngFor="let product of cart.products let i = index">
+          <div class="product-card card flex flex-row md:flex-row gap-3" >
+              <img class="w-9 shadow-2 border-round product-img" [src]="environment.apiUrl + product.product.thumbnails[0]" alt="product.product.title">
+              <div class="product-data">
+                  <span class="text-2xl font-bold">{{product.product.title}}</span>
+                  <span class="font-semibold">{{product.product.description}}</span>
+                  <span class="font-semibold">x{{product.quantity}}</span>
+              </div>
+          </div>
+      </li>
+  </ul>
+  </div>
+  <section class="cart-footer flex flex-column">
+      <p-divider></p-divider>
+      <div class="cart-total">
+        <p class="text-2xl font-bold"> Total</p>
+        <p class="text-2xl font-bold">$ {{cart.total}}</p> 
+      </div>
+      <div class="footer-buttons">
+        <p-button (click)="pay(cart)" size="large" label="Pay" icon="pi pi-money-bill" iconPos="right"></p-button>
+        <p-button (click)="back()" size="large" label="Back to cart" severity="danger"></p-button>
+      </div>
+  </section>
+</div>

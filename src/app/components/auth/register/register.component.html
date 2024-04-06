@@ -1,0 +1,29 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login">
+    <div class="login">
+      <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+        <div class="text-center mb-5">
+          <img src="assets/images/logos/logo.png" alt="Logo" height="50" class="mb-3">
+          <div class="text-900 text-3xl font-medium mb-3">Join us today!</div>
+        </div>
+  
+        <div>
+            <label for="first_name1" class="block text-900 font-medium mb-2">First Name</label>
+            <input id="first_name1" type="text" placeholder="Jhon" pInputText class="w-full mb-3" formControlName="first_name">
+
+            <label for="last_name1" class="block text-900 font-medium mb-2">Last Name</label>
+            <input id="last_name1" type="text" placeholder="Doe" pInputText class="w-full mb-3" formControlName="last_name">
+
+            <label for="age1" class="block text-900 font-medium mb-2">Birth Date</label>
+            <p-inputMask mask="99/99/9999" formControlName="age" placeholder="DD/MM/AAAA"></p-inputMask>
+
+            <label for="email1" class="block text-900 font-medium mb-2">Email</label>
+            <input id="email1" type="text" placeholder="Email address" pInputText class="w-full mb-3" formControlName="email">
+    
+            <label for="password1" class="block text-900 font-medium mb-2">Password</label>
+            <input id="password1" type="password" placeholder="Password" pInputText class="w-full mb-3" formControlName="password">
+    
+            <button type="submit" pButton pRipple label="Sign Up" icon="pi pi-user" class="w-full" [disabled]="!registerForm.valid"></button>
+        </div>
+      </div>
+    </div>
+</form>

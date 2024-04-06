@@ -1,0 +1,38 @@
+<div *ngIf="cart" class="cart-panel">
+    <div class="cart-info">
+    <section class="cart-header flex flex-row gap-3">
+        <i class="pi pi-shopping-cart" style="font-size: 2rem"></i>
+        <h3>Cart</h3>
+    </section>
+    <span class="text-2xl font-bold" *ngIf="cart.products.length === 0">Your cart is empty</span>
+    <p-divider></p-divider>
+    <ul class="cart-list flex flex-column gap-3">
+        <li class="product" *ngFor="let product of cart.products let i = index">
+            <div class="product-card card flex flex-row md:flex-row gap-3" >
+                <img class="w-9 shadow-2 border-round product-img" [src]="environment.apiUrl + product.product.thumbnails[0]" alt="product.product.title">
+                <div class="product-data">
+                    <span class="text-2xl font-bold">{{product.product.title}}</span>
+                    <div class="product-buttons">
+                        <p-inputGroup>
+                            <button type="button" icon="pi pi-plus" pButton class="p-button-primary" (click)="addProduct( i )"></button>
+                            <input type="text" pInputText [value]="product.quantity" disabled="true" class="input" />
+                            <button type="button" icon="pi pi-minus" pButton class="p-button-primary" (click)="subtractProduct( i )"></button>
+                        </p-inputGroup>
+                    </div>
+                </div>
+                <div class="product-delete">
+                    <p-button icon="pi pi-times" [rounded]="true" [text]="true" severity="danger" (click)="deleteProduct( i )"></p-button>
+                </div>
+            </div>
+        </li>
+    </ul>
+    </div>
+    <section class="cart-footer flex flex-column">
+        <p-divider></p-divider>
+        <div class="cart-total">
+            <p class="text-2xl font-bold"> Total</p>
+            <p class="text-2xl font-bold">{{cart.total}}</p> 
+        </div>
+        <p-button (click)="buy()" size="large" label="Buy Cart" icon="pi pi-money-bill" iconPos="right" [disabled]="cart.products.length === 0"></p-button>
+    </section>
+</div>

@@ -1,0 +1,27 @@
+<p-toolbar >
+    <ng-template pTemplate="start">
+        <img src="assets/images/logos/logo.png" class="nav_image" />
+    </ng-template>
+    <!--<ng-template pTemplate="center">
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText placeholder="Search" />
+        </span>
+    </ng-template>-->
+    <ng-template pTemplate="end">
+        <div class="flex flex-wrap align-items-center gap-3">
+            <button *ngIf="isLoggedIn$" (click)="displayUser = true" class="p-link inline-flex justify-content-center align-items-center pButton  h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i class="pi pi-user text-2xl"></i></button>
+            <button *ngIf="isLoggedIn$" (click)="displayCart = true" class="p-link inline-flex justify-content-center align-items-center pButton h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i class="pi pi-shopping-cart text-2xl" pBadge [value]="totalProducts"></i></button>
+        </div>
+    </ng-template>
+</p-toolbar>
+<p-sidebar [(visible)]="displayCart" position="right" styleClass="w-25rem">
+    <ng-template pTemplate="headless">
+        <app-cart *ngIf="displayCart" (onEditQuantityOfProduct)="editQuantityOfProduct($event)" (onDeleteProduct)="deleteProductFromCart($event)"  (onHide)="onHideCart($event)"></app-cart>
+    </ng-template>
+</p-sidebar>
+<p-sidebar [(visible)]="displayUser" position="left" styleClass="w-25rem">
+    <ng-template pTemplate="headless">
+        <app-user [user]="currentUser$"></app-user>
+    </ng-template>
+</p-sidebar>
