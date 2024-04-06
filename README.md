@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # FrontEnd
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
@@ -25,3 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+=======
+# CoderFrontEnd
+FrontEnd final Coder E-commerce
+>>>>>>> 1c1ac3ab35c7c5fc28c8a2154dfc82cb81096cec
