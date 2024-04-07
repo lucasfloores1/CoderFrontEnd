@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { ApiResponse } from '../dto/api-response.dto';
 import { environment } from '../../environments/environment.development';
 import { NewUser } from '../dto/User.dto';
@@ -50,21 +50,41 @@ export class AuthService {
     return this.cookieService.check('accessToken');
   }
 
-  login ( data : any ) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.apiUrl}/api/auth/login`, data, this.httpOptions);
+  login(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/api/auth/login`, data, this.httpOptions)
   }
+
+  logout(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/auth/logout`, this.httpOptions)
+      .pipe(
+        tap(() => {
+          this.updateCurrentUser(null);
+          this.updateIsLoggedIn(false);
+        })
+      );
+  }
+
+  /*login ( data : any ) : Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${this.apiUrl}/api/auth/login`, data, this.httpOptions);
+  }*/
 
   register ( user : NewUser ) : Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${this.apiUrl}/api/auth/register`, user, this.httpOptions);
   } 
 
   getUser () : Observable<ApiResponse> { 
-    return this.http.get<ApiResponse>( `${this.apiUrl}/api/auth/current`, this.httpOptions );
+    return this.http.get<ApiResponse>( `${this.apiUrl}/api/auth/current`, this.httpOptions )
+      .pipe(
+        tap(response => {
+          this.updateCurrentUser(response.payload);
+          this.updateIsLoggedIn(true);
+        })
+      );
   }
 
-  logout () : Observable<ApiResponse> {
+  /*logout () : Observable<ApiResponse> {
     return this.http.get<ApiResponse>( `${this.apiUrl}/api/auth/logout`, this.httpOptions );
-  }
+  }*/
 
   sendEmailRestorePassword ( email : String ) : Observable<ApiResponse> {
     const data = { email };

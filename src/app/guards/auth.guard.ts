@@ -1,11 +1,24 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, CanMatchFn, Router } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { map } from 'rxjs';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService)
   const router = inject(Router);
-  if (!authService.getAuthCookie() || !authService.getIsLoggedIn()) {
+
+  return authService.isLoggedIn$
+      .pipe(
+        map(isLoggedIn => {
+          if (isLoggedIn) {
+            return true;
+          } else {
+            router.navigate(['login']);
+            return false;
+          }
+        })
+      );
+  /*if (!authService.getAuthCookie() || !authService.getIsLoggedIn()) {
     if (authService.getAuthCookie()) {    
       authService.getUser().subscribe( response =>{
         authService.updateCurrentUser(response.payload);
@@ -21,5 +34,5 @@ export const authGuard: CanActivateFn = (route, state) => {
   } else {
     console.log('GUARD: Logged in');
     return true
-  }
+  }*/
 };
