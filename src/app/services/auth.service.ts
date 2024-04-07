@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { ApiResponse } from '../dto/api-response.dto';
 import { environment } from '../../environments/environment.development';
 import { NewUser } from '../dto/User.dto';
-import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +23,7 @@ export class AuthService {
   private apiUrl = environment.apiUrl
 
   constructor( 
-    private http : HttpClient,
-    private cookieService : CookieService 
+    private http : HttpClient
   ) { }
 
   getCurrentUser () : any {
@@ -36,18 +34,12 @@ export class AuthService {
     return this.loggedInSubject.value
   }
 
-  updateIsLoggedIn( value : boolean) {
-    //console.log('AUTH SERV: Update isLoggedIn', value);    
+  updateIsLoggedIn( value : boolean) {   
     this.loggedInSubject.next(value);
   }
 
   updateCurrentUser( user : any ) {
-    //console.log('AUTH SERV: Update currentUser', user);
     this.userSubject.next(user);
-  }
-
-  getAuthCookie() : boolean {
-    return this.cookieService.check('accessToken');
   }
 
   login(data: any): Observable<any> {
@@ -64,10 +56,6 @@ export class AuthService {
       );
   }
 
-  /*login ( data : any ) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.apiUrl}/api/auth/login`, data, this.httpOptions);
-  }*/
-
   register ( user : NewUser ) : Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${this.apiUrl}/api/auth/register`, user, this.httpOptions);
   } 
@@ -81,10 +69,6 @@ export class AuthService {
         })
       );
   }
-
-  /*logout () : Observable<ApiResponse> {
-    return this.http.get<ApiResponse>( `${this.apiUrl}/api/auth/logout`, this.httpOptions );
-  }*/
 
   sendEmailRestorePassword ( email : String ) : Observable<ApiResponse> {
     const data = { email };
